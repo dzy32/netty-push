@@ -1,4 +1,4 @@
-package com.sixj.nettypush.constant;
+package cn.mastercom.nettypush.constant;
 
 /**
  * @author sixiaojie

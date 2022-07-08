@@ -1,6 +1,5 @@
-package com.sixj.nettypush.pubsub;
+package cn.mastercom.nettypush.pubsub;
 
-import io.netty.channel.Channel;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -1,8 +1,8 @@
-package com.sixj.nettypush.service;
+package cn.mastercom.nettypush.service;
 
-import com.sixj.nettypush.config.NettyConfig;
-import com.sixj.nettypush.constant.BaseConstant;
-import com.sixj.nettypush.pubsub.NettyPushMessageBody;
+import cn.mastercom.nettypush.config.NettyConfig;
+import cn.mastercom.nettypush.constant.BaseConstant;
+import cn.mastercom.nettypush.pubsub.NettyPushMessageBody;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.beans.factory.annotation.Autowired;

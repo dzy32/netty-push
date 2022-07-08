@@ -1,8 +1,8 @@
-package com.sixj.nettypush.websocket;
+package cn.mastercom.nettypush.websocket;
 
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.sixj.nettypush.config.NettyConfig;
+import cn.mastercom.nettypush.config.NettyConfig;
+import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -11,6 +11,8 @@ import io.netty.util.AttributeKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import java.io.EOFException;
 
 
 /**
@@ -43,9 +45,9 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
         log.info("服务器收到消息：{}",msg.text());
 
         // 获取用户ID
-        JSONObject jsonObject = JSONUtil.parseObj(msg.text());
-        String uid = jsonObject.getStr("uid");
-
+//        JSONObject jsonObject = JSONUtil.parseObj(msg.text());
+//        String uid = jsonObject.getStr("uid");
+        String uid = getUserInfo(msg.text());
         // 将用户ID作为自定义属性加入到channel中，方便随时channel中获取用户ID
         AttributeKey<String> key = AttributeKey.valueOf("userId");
         ctx.channel().attr(key).setIfAbsent(uid);
@@ -54,7 +56,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
         NettyConfig.getUserChannelMap().put(uid,ctx.channel());
 
         // 回复消息
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器连接成功！"));
+        ctx.channel().writeAndFlush(new TextWebSocketFrame(writeConnectReponse(uid)));
     }
 
     @Override
@@ -82,5 +84,29 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
         AttributeKey<String> key = AttributeKey.valueOf("userId");
         String userId = ctx.channel().attr(key).get();
         NettyConfig.getUserChannelMap().remove(userId);
+    }
+    /**
+     * 获取用户连接信息
+     */
+    private String getUserInfo(String text) throws EOFException {
+
+        com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(text);
+        com.alibaba.fastjson.JSONObject data = jsonObject.getJSONObject("data");
+        if (null == jsonObject) {
+            throw new EOFException();
+        }
+        String clientUser = data.getString("user");
+        return clientUser;
+    }
+
+    private String writeConnectReponse(String user){
+        com.alibaba.fastjson.JSONObject reponse = new com.alibaba.fastjson.JSONObject();
+        reponse.put("type","connect");
+        reponse.put("result","连接成功");
+        reponse.put("code",1);
+        com.alibaba.fastjson.JSONObject data = new JSONObject();
+        data.put("connection_id",user);
+        reponse.put("data",data);
+        return reponse.toString();
     }
 }

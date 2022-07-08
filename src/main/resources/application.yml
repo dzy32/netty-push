@@ -1,0 +1,16 @@
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    password: redis123
+    port: 6379
+    pool:
+      max-active: 10000
+      max-idle: 1000
+      max-wait: 5000
+      min-idle: 10
+    timeout: 0
+webSocket:
+  netty:
+    port: 8081
+    path: /websocket

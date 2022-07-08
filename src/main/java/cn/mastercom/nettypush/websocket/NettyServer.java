@@ -1,4 +1,4 @@
-package com.sixj.nettypush.websocket;
+package cn.mastercom.nettypush.websocket;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -39,13 +39,13 @@ public class NettyServer{
     /**
      * 端口号
      */
-    @Value("${webSocket.netty.port:58080}")
+    @Value("${webSocket.netty.port}")
     private int port;
 
     /**
      * webSocket路径
      */
-    @Value("${webSocket.netty.path:/webSocket}")
+    @Value("${webSocket.netty.path}")
     private String webSocketPath;
 
     @Autowired
@@ -105,6 +105,7 @@ public class NettyServer{
         // 配置完成，开始绑定server，通过调用sync同步方法阻塞直到绑定成功
         ChannelFuture channelFuture = bootstrap.bind().sync();
         log.info("Server started and listen on:{}",channelFuture.channel().localAddress());
+        log.info("Server context path :{}",webSocketPath);
         // 对关闭通道进行监听
         channelFuture.channel().closeFuture().sync();
     }

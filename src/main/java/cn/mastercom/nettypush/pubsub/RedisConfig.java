@@ -1,9 +1,9 @@
-package com.sixj.nettypush.pubsub;
+package cn.mastercom.nettypush.pubsub;
 
+import cn.mastercom.nettypush.constant.BaseConstant;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sixj.nettypush.constant.BaseConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;

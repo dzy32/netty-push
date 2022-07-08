@@ -1,6 +1,6 @@
-package com.sixj.nettypush.controller;
+package cn.mastercom.nettypush.controller;
 
-import com.sixj.nettypush.service.PushService;
+import cn.mastercom.nettypush.service.PushService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

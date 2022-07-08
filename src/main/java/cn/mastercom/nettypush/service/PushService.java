@@ -1,4 +1,4 @@
-package com.sixj.nettypush.service;
+package cn.mastercom.nettypush.service;
 
 
 

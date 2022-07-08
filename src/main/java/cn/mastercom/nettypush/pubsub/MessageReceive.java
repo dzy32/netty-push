@@ -1,9 +1,9 @@
-package com.sixj.nettypush.pubsub;
+package cn.mastercom.nettypush.pubsub;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sixj.nettypush.config.NettyConfig;
+import cn.mastercom.nettypush.config.NettyConfig;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
